@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cpu", "Cpu\Cpu.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CpuDebugger", "NesDebugger\CpuDebugger.csproj", "{E587FBBE-F135-493D-B3CD-5759D0A4139C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CpuTests", "CpuTests\CpuTests.csproj", "{854EAD6F-55EE-418A-A335-34E9C77B6AC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E587FBBE-F135-493D-B3CD-5759D0A4139C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E587FBBE-F135-493D-B3CD-5759D0A4139C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E587FBBE-F135-493D-B3CD-5759D0A4139C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854EAD6F-55EE-418A-A335-34E9C77B6AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854EAD6F-55EE-418A-A335-34E9C77B6AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854EAD6F-55EE-418A-A335-34E9C77B6AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854EAD6F-55EE-418A-A335-34E9C77B6AC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

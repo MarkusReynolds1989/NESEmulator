@@ -51,16 +51,16 @@ partial class Form1
             this.memory.Columns.Add($"{i:x}", $"{i:x}");
         }
 
-        var memory = new ushort[ushort.MaxValue];
-
-        for (var i = 0; i < ushort.MaxValue; i += 1)
+        // Can't do this, this is inefficient.
+        /*for (var i = 0; i < ushort.MaxValue; i += 1)
         {
             for (var y = 0; y < 15; y += 1)
             {
                 this.memory.Rows[i].Cells[y].Value = memory[i];    
             }
             this.memory.Rows.Add();
-        }
+        }*/
+
         // 
         // instructions
         // 

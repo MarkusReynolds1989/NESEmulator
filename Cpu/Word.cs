@@ -1,4 +1,5 @@
 ﻿namespace NES;
+
 public readonly struct Word
 {
     private const byte ByteMask = 0x0F;
@@ -17,7 +18,7 @@ public readonly struct Word
 
     public readonly ushort FirstThreeNibbles;
 
-    // A word is a very small collection of data so can be a struct. 
+    // A word is a very small collection of data so can be a struct.
     // This should go out of scope and be popped off the stack very often so no need to worry about
     // a stack overflow.
     public Word(ushort instruction)
@@ -31,23 +32,35 @@ public readonly struct Word
         FirstThreeNibbles = CalcFirstThreeNibbles(instruction);
     }
 
-    private static byte CalcFirstNibble(ushort instruction) =>
-        (byte)(instruction & ByteMask);
+    private static byte CalcFirstNibble(ushort instruction)
+    {
+        return (byte)(instruction & ByteMask);
+    }
 
-    private static byte CalcSecondNibble(ushort instruction) =>
-        (byte)((instruction >> SecondAddress) & ByteMask);
+    private static byte CalcSecondNibble(ushort instruction)
+    {
+        return (byte)(instruction >> SecondAddress & ByteMask);
+    }
 
-    private static ushort CalcThirdNibble(ushort instruction) =>
-        (ushort)((instruction >> ThirdAddress) & ByteMask);
+    private static ushort CalcThirdNibble(ushort instruction)
+    {
+        return (ushort)(instruction >> ThirdAddress & ByteMask);
+    }
 
-    private static ushort CalcFourthNibble(ushort instruction) =>
-        (ushort)((instruction >> FourthAddress) & ByteMask);
+    private static ushort CalcFourthNibble(ushort instruction)
+    {
+        return (ushort)(instruction >> FourthAddress & ByteMask);
+    }
 
-    private static byte CalcFirstByte(ushort instruction) =>
-        (byte)(instruction & MaxByteMask);
+    private static byte CalcFirstByte(ushort instruction)
+    {
+        return (byte)(instruction & MaxByteMask);
+    }
 
-    private static ushort CalcSecondByte(ushort instruction) =>
-        (ushort)(instruction >> ThirdAddress);
+    private static ushort CalcSecondByte(ushort instruction)
+    {
+        return (ushort)(instruction >> ThirdAddress);
+    }
 
     private static ushort CalcFirstThreeNibbles(ushort instruction)
     {
@@ -73,6 +86,8 @@ public readonly struct Word
         return (ushort)(nibFour + nibThree + nibTwo + nibOne);
     }
 
-    public override string ToString() =>
-        $"Fourth Nib: {FourthNibble:x}, Third Nib: {ThirdNibble:x}, Second Nib: {SecondNibble:x}, First Nib: {FirstNibble:x}\nSecond Byte: {SecondByte:x}, First Byte: {FirstByte:x}, First Three Nibbles: {FirstThreeNibbles:x}";
+    public override string ToString()
+    {
+        return $"Fourth Nib: {FourthNibble:x}, Third Nib: {ThirdNibble:x}, Second Nib: {SecondNibble:x}, First Nib: {FirstNibble:x}\nSecond Byte: {SecondByte:x}, First Byte: {FirstByte:x}, First Three Nibbles: {FirstThreeNibbles:x}";
+    }
 }

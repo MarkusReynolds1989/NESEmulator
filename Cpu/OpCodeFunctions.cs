@@ -3,7 +3,7 @@
 namespace NES;
 
 [SuppressMessage("ReSharper", "RedundantAssignment")]
-public struct OpCodeFunctions
+public static class OpCodeFunctions
 {
     // 0x00
     public static void NoOp()
