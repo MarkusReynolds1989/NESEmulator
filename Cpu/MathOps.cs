@@ -1,4 +1,4 @@
-﻿namespace NES;
+﻿namespace Cpu;
 
 public static class MathOps
 {
@@ -8,7 +8,7 @@ public static class MathOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void AddWithCarry(ref VirtualMachine vm, Word instruction)
+    public static void AddWithCarry(VirtualMachine vm, Word instruction)
     {
         // $69 Immediate.
         vm.Accumulator += instruction.SecondByte;
@@ -20,5 +20,7 @@ public static class MathOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void DecrementMemory(ref VirtualMachine vm, Word instruction) { }
+    public static void DecrementMemory(VirtualMachine vm, Word instruction)
+    {
+    }
 }

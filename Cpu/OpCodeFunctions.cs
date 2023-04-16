@@ -1,57 +1,45 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace Cpu;
 
-namespace NES;
-
-[SuppressMessage("ReSharper", "RedundantAssignment")]
 public static class OpCodeFunctions
 {
-    // 0x00
+    /// 0x00
     public static void NoOp()
     {
-        Console.Write(" No Op.");
     }
 
-    // 0x01
+    /// 0x01
     public static void BranchOnPlus(BitArray statusRegisters)
     {
-        Console.Write(" Branch On Plus");
-        Console.Write(statusRegisters[0] ? " N register is negative." : " N register is positive.");
     }
 
     // 0x4e
-    public static void LogicalRightShiftAbsolute(BitArray statusRegisters)
+    public static void LogicalRightShiftAbsolute(VirtualMachine vm)
     {
-        Console.Write(" LSR Logical Shift Right Absolute");
-        statusRegisters.RightShift(1);
-        statusRegisters[2] = true;
+        vm.StatusRegisters.RightShift(1);
+        vm.StatusRegisters[2] = true;
     }
 
     // 0x8d
-    public static void StoreAccumulatorAbsolute(ushort[] memory, Word word, ushort accumulator)
+    public static void StoreAccumulatorAbsolute(ushort[] memory, Word word, VirtualMachine vm)
     {
-        Console.Write(" STA Store Accumulator Absolute");
-        memory[word.SecondByte] = accumulator;
-        Console.Write($"\n\t{memory[word.SecondByte]} stored at {word.SecondByte}");
+        memory[word.SecondByte] = vm.Accumulator;
     }
 
     // 0xa9
-    public static void LoadAccumulatorImmediate(Word word, ref ushort accumulator)
+    public static void LoadAccumulatorImmediate(Word word, VirtualMachine vm)
     {
-        Console.Write(" LDA Load Accumulator Immediate");
-        accumulator = word.FirstByte;
+        vm.Accumulator = word.FirstByte;
     }
 
     // 0xad
-    public static void LoadAccumulatorAbsolute(ushort[] memory, Word word, ref ushort accumulator)
+    public static void LoadAccumulatorAbsolute(ushort[] memory, Word word, VirtualMachine vm)
     {
-        Console.Write(" LDA Load Accumulator Absolute");
-        accumulator = memory[word.SecondByte];
+        vm.Accumulator = memory[word.SecondByte];
     }
 
     // 0xd8
     public static void ClearDecimal(BitArray statusRegisters)
     {
-        Console.Write(" Clear decimal");
         statusRegisters[4] = false;
     }
 }

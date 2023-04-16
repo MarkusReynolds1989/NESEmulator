@@ -1,4 +1,6 @@
-﻿namespace CpuTests;
+﻿using Cpu;
+
+namespace CpuTests;
 
 public class OpCodeTests
 {

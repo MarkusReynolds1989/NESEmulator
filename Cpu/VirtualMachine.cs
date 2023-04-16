@@ -1,28 +1,28 @@
-﻿namespace NES;
+﻿namespace Cpu;
 
 public class VirtualMachine
 {
     public readonly byte[] Cart;
-    public ushort[] Memory;
+    private readonly ushort[] _memory;
 
     // Registers
     public ushort Accumulator;
-    public byte X;
-    public byte Y;
-    public readonly byte _stackPointer;
+    private byte _x;
+    private byte _y;
+    private readonly byte _stackPointer;
     public ushort ProgramCounter;
-    public readonly BitArray _statusRegisters;
+    public readonly BitArray StatusRegisters;
 
     public VirtualMachine(byte[] cart)
     {
         Cart = cart;
-        Memory = new ushort[ushort.MaxValue];
+        _memory = new ushort[ushort.MaxValue];
         Accumulator = 0;
-        X = 0;
-        Y = 0;
+        _x = 0;
+        _y = 0;
         _stackPointer = 1;
         ProgramCounter = 0;
-        _statusRegisters = new BitArray(8);
+        StatusRegisters = new BitArray(8);
     }
 
     // Add two or one to the process counter and move on.
@@ -32,15 +32,13 @@ public class VirtualMachine
             Word.CombineInstructions(Cart[ProgramCounter], Cart[ProgramCounter + 1])
         );
 
-        Console.Write($"{word.SecondByte:x} {word.FirstByte:x} --");
-
         switch (word.FourthNibble)
         {
             case 0x00:
                 OpCodeFunctions.NoOp();
                 break;
             case 0x01:
-                OpCodeFunctions.BranchOnPlus(_statusRegisters);
+                OpCodeFunctions.BranchOnPlus(StatusRegisters);
                 break;
             case 0x04:
                 switch (word.ThirdNibble)
@@ -48,7 +46,7 @@ public class VirtualMachine
                     case 0x04:
                         break;
                     case 0x0e:
-                        OpCodeFunctions.LogicalRightShiftAbsolute(_statusRegisters);
+                        OpCodeFunctions.LogicalRightShiftAbsolute(this);
                         break;
                 }
 
@@ -58,7 +56,7 @@ public class VirtualMachine
                 switch (word.ThirdNibble)
                 {
                     case 0x0d:
-                        OpCodeFunctions.StoreAccumulatorAbsolute(Memory, word, Accumulator);
+                        OpCodeFunctions.StoreAccumulatorAbsolute(_memory, word, this);
                         break;
                 }
 
@@ -68,11 +66,11 @@ public class VirtualMachine
                 switch (word.ThirdNibble)
                 {
                     case 0x09:
-                        OpCodeFunctions.LoadAccumulatorImmediate(word, ref Accumulator);
+                        OpCodeFunctions.LoadAccumulatorImmediate(word, this);
                         break;
 
                     case 0x0d:
-                        OpCodeFunctions.LoadAccumulatorAbsolute(Memory, word, ref Accumulator);
+                        OpCodeFunctions.LoadAccumulatorAbsolute(_memory, word, this);
                         break;
                 }
 
@@ -81,7 +79,7 @@ public class VirtualMachine
                 switch (word.ThirdNibble)
                 {
                     case 0x08:
-                        OpCodeFunctions.ClearDecimal(_statusRegisters);
+                        OpCodeFunctions.ClearDecimal(StatusRegisters);
                         break;
                 }
 

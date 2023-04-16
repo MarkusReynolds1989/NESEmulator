@@ -1,51 +1,51 @@
-using NES;
+using Cpu;
 
 namespace CpuTests;
 
 public class WordTests
 {
-    private readonly Word _testWord = new(0x1234);
+    private static readonly Word TestWord = new(0x1234);
 
     [Fact]
     public void NibbleOne()
     {
-        Assert.Equal(0x04, _testWord.FirstNibble);
+        Assert.Equal(0x04, TestWord.FirstNibble);
     }
 
     [Fact]
     public void NibbleTwo()
     {
-        Assert.Equal(0x03, _testWord.SecondNibble);
+        Assert.Equal(0x03, TestWord.SecondNibble);
     }
 
     [Fact]
     public void NibbleThree()
     {
-        Assert.Equal(0x02, _testWord.ThirdNibble);
+        Assert.Equal(0x02, TestWord.ThirdNibble);
     }
 
     [Fact]
     public void NibbleFour()
     {
-        Assert.Equal(0x01, _testWord.FourthNibble);
+        Assert.Equal(0x01, TestWord.FourthNibble);
     }
 
     [Fact]
     public void FirstByte()
     {
-        Assert.Equal(0x34, _testWord.FirstByte);
+        Assert.Equal(0x34, TestWord.FirstByte);
     }
 
     [Fact]
     public void SecondByte()
     {
-        Assert.Equal(0x12, _testWord.SecondByte);
+        Assert.Equal(0x12, TestWord.SecondByte);
     }
 
     [Fact]
     public void FirstThreeNibbles()
     {
-        Assert.Equal(0x0234, _testWord.FirstThreeNibbles);
+        Assert.Equal(0x0234, TestWord.FirstThreeNibbles);
     }
 
     [Fact]

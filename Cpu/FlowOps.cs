@@ -1,17 +1,16 @@
-﻿namespace NES;
+﻿namespace Cpu;
 
 public static class FlowOps
 {
-    // TODO: Check all branch operations, in the instructions it says to go to a two byte address but we don't read the instructions like that.
     /// <summary>
     /// BPL - Branch On Plus
     /// $10
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void BranchOnPlus(ref VirtualMachine vm, Word instruction)
+    public static void BranchOnPlus(VirtualMachine vm, Word instruction)
     {
-        if (!vm._statusRegisters[Registers.Negative])
+        if (!vm.StatusRegisters[Registers.Negative])
         {
             vm.ProgramCounter = instruction.FirstThreeNibbles;
         }
@@ -21,11 +20,11 @@ public static class FlowOps
     /// BMI - Branch On Minus
     /// $30
     /// </summary>
-    /// <param name="vm"></param>
-    /// <param name="instruction"></param>
-    public static void BranchOnMinus(ref VirtualMachine vm, Word instruction)
+    /// <param name="vm">The virtual machine.</param>
+    /// <param name="instruction">The instruction as a word.</param>
+    public static void BranchOnMinus(VirtualMachine vm, Word instruction)
     {
-        if (vm._statusRegisters[Registers.Negative])
+        if (vm.StatusRegisters[Registers.Negative])
         {
             vm.ProgramCounter = instruction.FirstThreeNibbles;
         }
@@ -37,9 +36,9 @@ public static class FlowOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void BranchOnOverflowClear(ref VirtualMachine vm, Word instruction)
+    public static void BranchOnOverflowClear(VirtualMachine vm, Word instruction)
     {
-        if (!vm._statusRegisters[Registers.Overflow])
+        if (!vm.StatusRegisters[Registers.Overflow])
         {
             vm.ProgramCounter = instruction.FirstThreeNibbles;
         }
@@ -51,9 +50,9 @@ public static class FlowOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void BranchOnOverflowSet(ref VirtualMachine vm, Word instruction)
+    public static void BranchOnOverflowSet(VirtualMachine vm, Word instruction)
     {
-        if (vm._statusRegisters[Registers.Overflow])
+        if (vm.StatusRegisters[Registers.Overflow])
         {
             vm.ProgramCounter = instruction.FirstThreeNibbles;
         }
@@ -65,9 +64,9 @@ public static class FlowOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void BranchOnCarryClear(ref VirtualMachine vm, Word instruction)
+    public static void BranchOnCarryClear(VirtualMachine vm, Word instruction)
     {
-        if (!vm._statusRegisters[Registers.Carry])
+        if (!vm.StatusRegisters[Registers.Carry])
         {
             vm.ProgramCounter = instruction.FirstThreeNibbles;
         }
@@ -79,9 +78,9 @@ public static class FlowOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void BranchOnCarrySet(ref VirtualMachine vm, Word instruction)
+    public static void BranchOnCarrySet(VirtualMachine vm, Word instruction)
     {
-        if (vm._statusRegisters[Registers.Carry])
+        if (vm.StatusRegisters[Registers.Carry])
         {
             vm.ProgramCounter = instruction.FirstThreeNibbles;
         }
@@ -93,7 +92,7 @@ public static class FlowOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void BranchOnNotEqual(ref VirtualMachine vm, Word instruction)
+    public static void BranchOnNotEqual(VirtualMachine vm, Word instruction)
     {
         if (vm.Accumulator != instruction.FirstThreeNibbles)
         {
@@ -107,7 +106,7 @@ public static class FlowOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void BranchOnEqual(ref VirtualMachine vm, Word instruction)
+    public static void BranchOnEqual(VirtualMachine vm, Word instruction)
     {
         if (vm.Accumulator == instruction.FirstThreeNibbles)
         {
@@ -121,9 +120,9 @@ public static class FlowOps
     /// </summary>
     /// <param name="vm"></param>
     /// <param name="instruction"></param>
-    public static void Break(ref VirtualMachine vm, Word instruction)
+    public static void Break(VirtualMachine vm, Word instruction)
     {
-        vm._statusRegisters[Registers.Break] = true;
+        vm.StatusRegisters[Registers.Break] = true;
         vm.ProgramCounter += 1;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace NES;
+﻿namespace Cpu;
 
 public static class LogicOps
 {
@@ -23,7 +23,7 @@ public static class LogicOps
     public static void ArithmeticShiftLeft(ref VirtualMachine vm, Word instruction)
     {
         // TODO: Get the 7th bit to see what to set the carry to.
-        vm._statusRegisters[Registers.Carry] = true; // <- Actually get the bit, I will program this into the Word module.
+        vm.StatusRegisters[Registers.Carry] = true; // <- Actually get the bit, I will program this into the Word module.
         // $0A Accumulator.
         vm.Accumulator <<= 0x01;
     }
