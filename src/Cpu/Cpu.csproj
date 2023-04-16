@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <OutputType>library</OutputType>
         <Nullable>disable</Nullable>
         <PublishAOT>true</PublishAOT>
     </PropertyGroup>

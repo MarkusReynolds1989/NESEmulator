@@ -1,4 +1,4 @@
-﻿namespace NesDebugger;
+﻿namespace CpuDebugger;
 
 partial class Form1
 {
