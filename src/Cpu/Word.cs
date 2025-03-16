@@ -1,6 +1,6 @@
 ﻿namespace Cpu;
 
-public readonly struct Word
+public readonly struct Word(ushort instruction)
 {
     private const byte ByteMask = 0x0F;
     private const byte FourthAddress = 0x0C;
@@ -8,26 +8,15 @@ public readonly struct Word
     private const byte SecondAddress = 0x04;
     private const byte MaxByteMask = 0xFF;
 
-    public readonly byte FirstNibble;
-    public readonly byte SecondNibble;
-    public readonly ushort ThirdNibble;
-    public readonly ushort FourthNibble;
+    public readonly byte FirstNibble = CalcFirstNibble(instruction);
+    public readonly byte SecondNibble = CalcSecondNibble(instruction);
+    public readonly ushort ThirdNibble = CalcThirdNibble(instruction);
+    public readonly ushort FourthNibble = CalcFourthNibble(instruction);
 
-    public readonly byte FirstByte;
-    public readonly ushort SecondByte;
+    public readonly byte FirstByte = CalcFirstByte(instruction);
+    public readonly ushort SecondByte = CalcSecondByte(instruction);
 
-    public readonly ushort FirstThreeNibbles;
-
-    public Word(ushort instruction)
-    {
-        FirstNibble = CalcFirstNibble(instruction);
-        SecondNibble = CalcSecondNibble(instruction);
-        ThirdNibble = CalcThirdNibble(instruction);
-        FourthNibble = CalcFourthNibble(instruction);
-        FirstByte = CalcFirstByte(instruction);
-        SecondByte = CalcSecondByte(instruction);
-        FirstThreeNibbles = CalcFirstThreeNibbles(instruction);
-    }
+    public readonly ushort FirstThreeNibbles = CalcFirstThreeNibbles(instruction);
 
     private static byte CalcFirstNibble(ushort instruction) => (byte) (instruction & ByteMask);
 

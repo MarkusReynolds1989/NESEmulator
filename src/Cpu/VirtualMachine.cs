@@ -52,6 +52,17 @@ public class VirtualMachine
 
                 break;
 
+            case 0x06:
+                switch (word.ThirdNibble)
+                {
+                    // ADC Load Immediate
+                    case 0x09:
+                        MathOps.AddWithCarryImmediate(word, this);
+                        break;
+                }
+
+                break;
+
             case 0x08:
                 switch (word.ThirdNibble)
                 {

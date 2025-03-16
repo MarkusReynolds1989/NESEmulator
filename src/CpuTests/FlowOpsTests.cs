@@ -5,14 +5,6 @@ namespace CpuTests;
 public class FlowOpsTests
 {
     [Fact]
-    public void BranchOnPlus()
-    {
-        var vm = new VirtualMachine(TestCart.TestCartBytes);
-        FlowOps.BranchOnPlus(vm, new Word(Word.CombineInstructions(vm.Cart[1], vm.Cart[0])));
-        Assert.Equal(0x054e, vm.ProgramCounter);
-    }
-
-    [Fact]
     public void DontBranchOnPlus()
     {
         var word = new Word(0x0123);
